@@ -1,0 +1,1867 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#720f24">
+  <meta name="description" content="JL PROJECT HUB brings together JL voting campaigns, streaming projects, guides, and events for Starflares and Byeolbitdan.">
+  <title>JL PROJECT HUB | One Hub, Every Starflare</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ========================================
+       JL PROJECT HUB | GLOBAL DESIGN SYSTEM
+       Crimson Red • Gold • Warm White
+    ======================================== */
+
+    :root {
+      --red: #720f24;
+      --red-dark: #4b0918;
+      --red-light: #9c2841;
+      --gold: #c6a15b;
+      --gold-light: #ead7a8;
+      --cream: #faf7f0;
+      --white: #ffffff;
+      --ink: #30252a;
+      --muted: #81757a;
+      --line: #eee5dc;
+      --green: #287c55;
+
+      --font-heading: "Playfair Display", Georgia, serif;
+      --font-body: "DM Sans", Arial, sans-serif;
+
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+
+      --shadow: 0 8px 30px rgba(73, 16, 33, 0.06);
+      --shadow-hover: 0 15px 36px rgba(73, 16, 33, 0.11);
+
+      --page-width: 1240px;
+      --header-height: 88px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 110px;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button, input {
+      font: inherit;
+    }
+
+    button, a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button:focus-visible,
+    a:focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 4px;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    .container {
+      width: min(var(--page-width), calc(100% - 48px));
+      margin-inline: auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--red);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 22px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .section-heading {
+      font-family: var(--font-heading);
+      font-size: 26px;
+      font-weight: 600;
+      line-height: 1.35;
+      color: var(--red-dark);
+    }
+
+    .section-description {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      margin-bottom: 22px;
+    }
+
+    .text-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--red);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .text-link:hover {
+      color: var(--red-light);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 46px;
+      padding: 12px 20px;
+      border: 1px solid transparent;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 700;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: var(--red);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--red-dark);
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: var(--red-dark);
+    }
+
+    .btn-outline {
+      border-color: rgba(255,255,255,0.45);
+      color: white;
+    }
+
+    .btn-light {
+      background: white;
+      color: var(--red);
+      border-color: var(--line);
+    }
+
+    /* HEADER */
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250, 247, 240, 0.96);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .header-main {
+      min-height: var(--header-height);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 54px;
+      height: 54px;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--gold);
+      border-radius: 15px;
+      background: var(--red);
+      color: var(--gold-light);
+      font-family: var(--font-heading);
+      font-size: 25px;
+      box-shadow: 0 5px 15px rgba(114, 15, 36, 0.13);
+    }
+
+    .brand-copy {
+      min-width: 0;
+    }
+
+    .brand-name {
+      color: var(--red-dark);
+      font-family: var(--font-heading);
+      font-size: 25px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      line-height: 1.25;
+    }
+
+    .brand-subtitle {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.5;
+      letter-spacing: 0.25px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .profile-button {
+      width: 43px;
+      height: 43px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: white;
+      color: var(--red);
+      font-size: 18px;
+    }
+
+    .mobile-menu-button {
+      display: none;
+      width: 43px;
+      height: 43px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: white;
+      color: var(--red);
+      font-size: 21px;
+    }
+
+    .navigation {
+      border-top: 1px solid rgba(114, 15, 36, 0.04);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 52px;
+    }
+
+    .nav-link {
+      position: relative;
+      padding: 13px 16px;
+      color: #76676d;
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--red);
+    }
+
+    .nav-link.active::after {
+      position: absolute;
+      right: 16px;
+      bottom: 0;
+      left: 16px;
+      height: 3px;
+      border-radius: 3px 3px 0 0;
+      background: var(--gold);
+      content: "";
+    }
+
+    /* PAGE SECTIONS */
+
+    main {
+      min-height: 65vh;
+    }
+
+    .page-section {
+      display: none;
+      padding: 40px 0 64px;
+      animation: fade-in 0.3s ease both;
+    }
+
+    .page-section.active {
+      display: block;
+    }
+
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(7px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* HERO */
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1.35fr 0.65fr;
+      align-items: center;
+      gap: 32px;
+      min-height: 345px;
+      padding: 48px;
+      border-radius: var(--radius-lg);
+      background:
+        radial-gradient(circle at 82% 28%, rgba(198,161,91,0.18), transparent 27%),
+        linear-gradient(120deg, var(--red-dark), var(--red) 68%, #84182f);
+      color: white;
+      box-shadow: 0 18px 45px rgba(75, 9, 24, 0.13);
+    }
+
+    .hero::before,
+    .hero::after {
+      position: absolute;
+      pointer-events: none;
+      color: rgba(234, 215, 168, 0.5);
+      font-family: var(--font-heading);
+      content: "✦";
+      animation: twinkle 4s ease-in-out infinite;
+    }
+
+    .hero::before {
+      top: 36px;
+      right: 42%;
+      font-size: 20px;
+    }
+
+    .hero::after {
+      right: 8%;
+      bottom: 32px;
+      font-size: 31px;
+      animation-delay: 1.5s;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.35; transform: scale(0.85); }
+      50% { opacity: 1; transform: scale(1.1); }
+    }
+
+    .hero .eyebrow {
+      color: var(--gold-light);
+    }
+
+    .hero h1 {
+      max-width: 650px;
+      margin: 15px 0 16px;
+      font-family: var(--font-heading);
+      font-size: clamp(34px, 4.5vw, 51px);
+      font-weight: 600;
+      line-height: 1.16;
+      letter-spacing: -0.6px;
+    }
+
+    .hero h1 span {
+      color: var(--gold-light);
+    }
+
+    .hero-description {
+      max-width: 520px;
+      color: rgba(255,255,255,0.78);
+      font-size: 15px;
+      line-height: 1.9;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .hero-art {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 210px;
+    }
+
+    .hero-orbit {
+      position: absolute;
+      width: 210px;
+      height: 210px;
+      border: 1px solid rgba(234,215,168,0.35);
+      border-radius: 50%;
+    }
+
+    .hero-orbit::before {
+      position: absolute;
+      inset: 18px;
+      border: 1px dashed rgba(234,215,168,0.25);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .hero-star {
+      position: relative;
+      z-index: 1;
+      color: var(--gold-light);
+      font-size: 108px;
+      line-height: 1;
+      text-shadow: 0 0 40px rgba(234,215,168,0.3);
+      animation: float-star 5s ease-in-out infinite;
+    }
+
+    @keyframes float-star {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-9px); }
+    }
+
+    /* LIVE STATION */
+
+    .station-card {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      margin-top: 26px;
+      padding: 24px;
+      border: 1px solid #e9d8ba;
+      border-radius: var(--radius-md);
+      background: linear-gradient(110deg, #fffdf8, #f7efdf);
+    }
+
+    .station-icon {
+      width: 60px;
+      height: 60px;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      border-radius: 17px;
+      background: var(--red);
+      color: var(--gold-light);
+      font-size: 26px;
+    }
+
+    .station-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .station-title {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--red-dark);
+    }
+
+    .station-description {
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .live-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 6px;
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #36a66e;
+      box-shadow: 0 0 0 4px rgba(54,166,110,0.12);
+    }
+
+    /* GENERIC CARDS */
+
+    .content-section {
+      margin-top: 48px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      min-width: 0;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: var(--white);
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .card-icon {
+      width: 47px;
+      height: 47px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 19px;
+      border-radius: 14px;
+      background: #f7ecee;
+      color: var(--red);
+      font-size: 21px;
+    }
+
+    .card-icon.gold {
+      background: #f7f0e2;
+      color: #94702e;
+    }
+
+    .card-icon.green {
+      background: #eaf4ee;
+      color: var(--green);
+    }
+
+    .card-title {
+      font-family: var(--font-heading);
+      font-size: 19px;
+      font-weight: 600;
+      line-height: 1.45;
+      color: var(--red-dark);
+    }
+
+    .card-description {
+      margin: 9px 0 19px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.85;
+    }
+
+    .card .text-link {
+      margin-top: auto;
+    }
+
+    .card-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 9px;
+      border-radius: 6px;
+      background: #f7ecee;
+      color: var(--red);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .card-tag.gold {
+      background: #f7f0e2;
+      color: #846328;
+    }
+
+    /* CAMPAIGNS */
+
+    .campaign-card {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .campaign-card .card-title {
+      margin-top: 13px;
+    }
+
+    .campaign-card .card-description {
+      flex: 1;
+    }
+
+    .campaign-note {
+      padding: 12px 14px;
+      border-left: 3px solid var(--gold);
+      border-radius: 0 8px 8px 0;
+      background: #fbf6eb;
+      color: #725b36;
+      font-size: 12px;
+    }
+
+    /* PAGE BANNER */
+
+    .page-banner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 30px;
+      padding: 31px 34px;
+      border: 1px solid #eadcc4;
+      border-radius: var(--radius-md);
+      background: linear-gradient(115deg, #fffdf9, #f5ebdc);
+    }
+
+    .page-banner h1 {
+      margin-top: 7px;
+      color: var(--red-dark);
+      font-family: var(--font-heading);
+      font-size: 34px;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .page-banner p {
+      max-width: 650px;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .banner-symbol {
+      flex-shrink: 0;
+      color: var(--gold);
+      font-size: 60px;
+    }
+
+    /* CONTENT LISTS */
+
+    .list-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 19px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .list-card:last-child {
+      border-bottom: 0;
+    }
+
+    .list-symbol {
+      width: 45px;
+      height: 45px;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: #f7ecee;
+      color: var(--red);
+      font-size: 19px;
+    }
+
+    .list-copy {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .list-title {
+      color: var(--red-dark);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .list-description {
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .empty-state {
+      padding: 32px 20px;
+      border: 1px dashed #ddcdbb;
+      border-radius: var(--radius-md);
+      background: rgba(255,255,255,0.55);
+      text-align: center;
+    }
+
+    .empty-state .empty-icon {
+      margin-bottom: 10px;
+      color: var(--gold);
+      font-size: 31px;
+    }
+
+    .empty-state h3 {
+      color: var(--red-dark);
+      font-family: var(--font-heading);
+      font-size: 19px;
+    }
+
+    .empty-state p {
+      max-width: 430px;
+      margin: 7px auto 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* CALENDAR */
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .calendar-day-name {
+      padding: 9px 0;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .calendar-day {
+      min-height: 68px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: white;
+      color: var(--ink);
+      font-size: 13px;
+    }
+
+    .calendar-day.today {
+      border-color: var(--gold);
+      background: #faf2df;
+      font-weight: 700;
+    }
+
+    .calendar-day.muted {
+      background: #f7f3ed;
+      color: #b8adb0;
+    }
+
+    .calendar-day .event-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--red);
+    }
+
+    /* PROFILE */
+
+    .profile-panel {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .profile-emblem {
+      width: 85px;
+      height: 85px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 18px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      background: var(--red);
+      color: var(--gold-light);
+      font-size: 34px;
+    }
+
+    .profile-panel .empty-state {
+      padding: 40px 24px;
+    }
+
+    /* FOOTER */
+
+    .site-footer {
+      margin-top: 20px;
+      border-top: 1px solid #e9dfd2;
+      background: #f3ede3;
+    }
+
+    .footer-main {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 45px;
+      padding: 36px 0;
+    }
+
+    .footer-brand {
+      color: var(--red-dark);
+      font-family: var(--font-heading);
+      font-size: 21px;
+      font-weight: 700;
+    }
+
+    .footer-description {
+      max-width: 490px;
+      margin-top: 8px;
+      color: #796b6c;
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    .footer-social-title {
+      margin-bottom: 12px;
+      color: var(--red-dark);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 42px;
+      min-height: 42px;
+      padding: 0 12px;
+      border: 1px solid #e1d4c4;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.7);
+      color: var(--red);
+      font-size: 12px;
+      font-weight: 700;
+      transition: background 0.2s ease;
+    }
+
+    .social-link:hover {
+      background: white;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 17px 0;
+      border-top: 1px solid #e4d9cb;
+      color: #887a78;
+      font-size: 11px;
+    }
+
+    /* RESPONSIVE */
+
+    @media (min-width: 1000px) {
+      .nav-inner {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr 0.45fr;
+        padding: 36px;
+      }
+
+      .hero-orbit {
+        width: 160px;
+        height: 160px;
+      }
+
+      .hero-star {
+        font-size: 85px;
+      }
+
+      .card-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .nav-inner {
+        gap: 0;
+      }
+
+      .nav-link {
+        padding-inline: 12px;
+      }
+    }
+
+    @media (max-width: 650px) {
+      :root {
+        --header-height: 75px;
+      }
+
+      .container {
+        width: calc(100% - 32px);
+      }
+
+      .brand {
+        gap: 10px;
+      }
+
+      .brand-mark {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        font-size: 21px;
+      }
+
+      .brand-name {
+        font-size: 19px;
+        letter-spacing: 0;
+      }
+
+      .brand-subtitle {
+        max-width: 220px;
+        font-size: 9px;
+        line-height: 1.45;
+      }
+
+      .header-actions {
+        gap: 7px;
+      }
+
+      .profile-button,
+      .mobile-menu-button {
+        width: 38px;
+        height: 38px;
+      }
+
+      .mobile-menu-button {
+        display: grid;
+        place-items: center;
+      }
+
+      .navigation {
+        display: none;
+        border-top: 1px solid var(--line);
+        background: var(--cream);
+      }
+
+      .navigation.open {
+        display: block;
+      }
+
+      .nav-inner {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 4px;
+        padding-block: 10px;
+      }
+
+      .nav-link {
+        padding: 11px 12px;
+        border-radius: 8px;
+        white-space: normal;
+      }
+
+      .nav-link.active {
+        background: #f3e5e5;
+      }
+
+      .nav-link.active::after {
+        display: none;
+      }
+
+      .page-section {
+        padding: 25px 0 44px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        min-height: auto;
+        padding: 29px 23px;
+        border-radius: 19px;
+      }
+
+      .hero h1 {
+        font-size: 35px;
+      }
+
+      .hero-description {
+        font-size: 13px;
+      }
+
+      .hero-art {
+        position: absolute;
+        top: 12px;
+        right: -45px;
+        min-height: auto;
+        opacity: 0.16;
+      }
+
+      .hero-orbit {
+        width: 180px;
+        height: 180px;
+      }
+
+      .hero-star {
+        font-size: 95px;
+      }
+
+      .hero > div:first-child {
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero-actions {
+        gap: 9px;
+      }
+
+      .btn {
+        min-height: 43px;
+        padding: 11px 14px;
+        font-size: 12px;
+      }
+
+      .station-card {
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 13px;
+        padding: 18px;
+      }
+
+      .station-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 13px;
+        font-size: 22px;
+      }
+
+      .station-content {
+        flex-basis: calc(100% - 65px);
+      }
+
+      .station-title {
+        font-size: 18px;
+      }
+
+      .station-card > .btn {
+        width: 100%;
+      }
+
+      .content-section {
+        margin-top: 36px;
+      }
+
+      .section-heading {
+        font-size: 23px;
+      }
+
+      .section-description {
+        font-size: 12px;
+      }
+
+      .section-header {
+        align-items: flex-start;
+        margin-bottom: 17px;
+      }
+
+      .section-header > .text-link {
+        margin-top: 5px;
+        white-space: nowrap;
+        font-size: 11px;
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr;
+        gap: 13px;
+      }
+
+      .card {
+        padding: 21px;
+      }
+
+      .card-icon {
+        width: 42px;
+        height: 42px;
+        margin-bottom: 14px;
+      }
+
+      .card-title {
+        font-size: 18px;
+      }
+
+      .card-description {
+        margin-bottom: 14px;
+      }
+
+      .page-banner {
+        padding: 23px 20px;
+      }
+
+      .page-banner h1 {
+        font-size: 29px;
+      }
+
+      .page-banner p {
+        font-size: 13px;
+      }
+
+      .banner-symbol {
+        font-size: 38px;
+      }
+
+      .calendar-grid {
+        gap: 4px;
+      }
+
+      .calendar-day {
+        min-height: 48px;
+        border-radius: 7px;
+        font-size: 11px;
+      }
+
+      .calendar-day-name {
+        font-size: 9px;
+      }
+
+      .footer-main {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        padding: 28px 0;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 5px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- SHARED WEBSITE HEADER -->
+  <header class="site-header">
+    <div class="container header-main">
+      <a href="#home" class="brand" aria-label="JL Project Hub Home">
+        <div class="brand-mark" aria-hidden="true">JL<span style="color:#ffffff">✦</span></div>
+        <div class="brand-copy">
+          <div class="brand-name">JL PROJECT HUB</div>
+          <div class="brand-subtitle">
+            JL Voting Project Team | JL Streaming Project Team
+          </div>
+        </div>
+      </a>
+
+      <div class="header-actions">
+        <button class="profile-button" data-page="profile"
+          aria-label="Open My Profile" title="My Profile">♙</button>
+        <button class="mobile-menu-button" id="menuToggle"
+          aria-label="Toggle navigation" aria-expanded="false">☰</button>
+      </div>
+    </div>
+
+    <nav class="navigation" id="navigation" aria-label="Main navigation">
+      <div class="container nav-inner">
+        <a href="#home" class="nav-link active" data-page="home">Home</a>
+        <a href="#voting" class="nav-link" data-page="voting">Voting</a>
+        <a href="#streaming" class="nav-link" data-page="streaming">Streaming</a>
+        <a href="#calendar" class="nav-link" data-page="calendar">Calendar</a>
+        <a href="#red-corner" class="nav-link" data-page="red-corner">Red Corner</a>
+        <a href="#profile" class="nav-link" data-page="profile">My Profile</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+
+    <!-- ====================================
+         HOME
+    ===================================== -->
+    <section class="page-section active" id="home" data-section="home">
+
+      <div class="hero">
+        <div>
+          <div class="eyebrow">A home for every Starflare</div>
+          <h1>Every star shines.<br>Every <span>effort</span> matters.</h1>
+          <p class="hero-description">
+            Welcome to JL PROJECT HUB, your central space for JL voting
+            campaigns, streaming projects, fan guides, and community events.
+            Together, let's make every effort count.
+          </p>
+          <div class="hero-actions">
+            <button class="btn btn-gold" data-page="voting">Explore Voting <span>↗</span></button>
+            <button class="btn btn-outline" data-page="streaming">Explore Streaming <span>→</span></button>
+          </div>
+        </div>
+
+        <div class="hero-art" aria-hidden="true">
+          <div class="hero-orbit"></div>
+          <div class="hero-star">✦</div>
+        </div>
+      </div>
+
+      <!-- STATIONHEAD -->
+      <div class="station-card">
+        <div class="station-icon" aria-hidden="true">♫</div>
+        <div class="station-content">
+          <div class="live-label"><span class="live-dot"></span> Stationhead Station</div>
+          <h2 class="station-title">JLSPT Listening Station</h2>
+          <p class="station-description">
+            Tune in and enjoy JL and AHOF music with fellow Starflares.
+            The station is intended to be open 24/7, except during scheduled
+            collaboration streams.
+          </p>
+        </div>
+        <a class="btn btn-primary" href="https://app.stationhead.com/jlspteam"
+          target="_blank" rel="noopener noreferrer">Listen on Stationhead ↗</a>
+      </div>
+
+      <!-- PRIORITY CAMPAIGNS -->
+      <section class="content-section">
+        <div class="section-header">
+          <div>
+            <div class="eyebrow">What needs attention</div>
+            <h2 class="section-heading">Priority Campaigns</h2>
+            <p class="section-description">Your starting point for supporting JL.</p>
+          </div>
+          <a href="#voting" class="text-link" data-page="voting">All campaigns →</a>
+        </div>
+
+        <div class="card-grid">
+          <article class="card campaign-card">
+            <div class="card-icon">♡</div>
+            <span class="card-tag">Voting</span>
+            <h3 class="card-title">Voting Campaigns</h3>
+            <p class="card-description">
+              Find active voting projects, upcoming award rounds, and
+              step-by-step guides to help you vote.
+            </p>
+            <button class="text-link" data-page="voting">Explore voting →</button>
+          </article>
+
+          <article class="card campaign-card">
+            <div class="card-icon gold">♫</div>
+            <span class="card-tag gold">Streaming</span>
+            <h3 class="card-title">Streaming Campaigns</h3>
+            <p class="card-description">
+              Discover priority streaming goals, official playlists,
+              and platform guides for JL and AHOF.
+            </p>
+            <button class="text-link" data-page="streaming">Explore streaming →</button>
+          </article>
+
+          <article class="card campaign-card">
+            <div class="card-icon green">▦</div>
+            <span class="card-tag">Events</span>
+            <h3 class="card-title">Upcoming Events</h3>
+            <p class="card-description">
+              Keep track of project schedules, voting deadlines,
+              streaming events, and birthday activities.
+            </p>
+            <button class="text-link" data-page="calendar">View calendar →</button>
+          </article>
+        </div>
+      </section>
+
+      <!-- QUICK ACCESS -->
+      <section class="content-section">
+        <div class="section-header">
+          <div>
+            <div class="eyebrow">Everything in one place</div>
+            <h2 class="section-heading">Explore the Hub</h2>
+            <p class="section-description">Find the information you need without the clutter.</p>
+          </div>
+        </div>
+
+        <div class="card-grid">
+          <article class="card">
+            <div class="card-icon">▤</div>
+            <h3 class="card-title">Voting Guides</h3>
+            <p class="card-description">Learn how to participate in voting campaigns with clear instructions.</p>
+            <button class="text-link" data-page="voting">Browse guides →</button>
+          </article>
+
+          <article class="card">
+            <div class="card-icon gold">♫</div>
+            <h3 class="card-title">JL Discography</h3>
+            <p class="card-description">Explore JL and AHOF releases, songs, and official listening links.</p>
+            <button class="text-link" data-page="streaming">Explore music →</button>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">✦</div>
+            <h3 class="card-title">Red Corner</h3>
+            <p class="card-description">Visit the community space for public announcements and project submissions.</p>
+            <button class="text-link" data-page="red-corner">Enter Red Corner →</button>
+          </article>
+        </div>
+      </section>
+
+      <div class="content-section campaign-note">
+        ✦ Campaign information and schedules will be published and verified
+        by the JL PROJECT HUB team. Check each campaign's official instructions
+        before participating.
+      </div>
+    </section>
+
+    <!-- ====================================
+         VOTING
+    ===================================== -->
+    <section class="page-section" id="voting" data-section="voting">
+      <div class="page-banner">
+        <div>
+          <div class="eyebrow">Every vote counts</div>
+          <h1>Voting Center</h1>
+          <p>
+            Discover voting campaigns, follow official guides, and keep
+            track of important deadlines for JL.
+          </p>
+        </div>
+        <div class="banner-symbol" aria-hidden="true">♡</div>
+      </div>
+
+      <section class="content-section" style="margin-top:0">
+        <div class="section-header">
+          <div>
+            <h2 class="section-heading">Voting Resources</h2>
+            <p class="section-description">Choose what you need to do next.</p>
+          </div>
+        </div>
+
+        <div class="card-grid">
+          <article class="card">
+            <div class="card-icon">♡</div>
+            <h3 class="card-title">Active Campaigns</h3>
+            <p class="card-description">A dedicated space for current polls, awards, voting links, goals, and verified deadlines.</p>
+            <span class="card-tag">Campaign directory</span>
+          </article>
+
+          <article class="card">
+            <div class="card-icon gold">🎂</div>
+            <h3 class="card-title">Birthday Voting</h3>
+            <p class="card-description">Find birthday polls, upcoming celebrations, and special voting projects for JL.</p>
+            <span class="card-tag gold">Birthday projects</span>
+          </article>
+
+          <article class="card">
+            <div class="card-icon green">▤</div>
+            <h3 class="card-title">Voting Guides</h3>
+            <p class="card-description">Step-by-step tutorials covering eligibility, voting currencies, daily tasks, and app instructions.</p>
+            <span class="card-tag">Tutorials</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-section">
+        <div class="section-header">
+          <div>
+            <h2 class="section-heading">Campaign Directory</h2>
+            <p class="section-description">Official campaign links and details will appear here as they are added.</p>
+          </div>
+        </div>
+
+        <div class="empty-state">
+          <div class="empty-icon">✦</div>
+          <h3>Every campaign starts with a goal.</h3>
+          <p>
+            No unverified campaigns have been added yet. This section is ready
+            for the team to publish official links, rules, and deadlines.
+          </p>
+        </div>
+      </section>
+    </section>
+
+    <!-- ====================================
+         STREAMING
+    ===================================== -->
+    <section class="page-section" id="streaming" data-section="streaming">
+      <div class="page-banner">
+        <div>
+          <div class="eyebrow">Let the music shine</div>
+          <h1>Streaming Center</h1>
+          <p>
+            Find music, playlists, streaming instructions, and troubleshooting
+            resources for JL and AHOF.
+          </p>
+        </div>
+        <div class="banner-symbol" aria-hidden="true">♫</div>
+      </div>
+
+      <section class="content-section" style="margin-top:0">
+        <div class="section-header">
+          <div>
+            <h2 class="section-heading">Music & Streaming Resources</h2>
+            <p class="section-description">Everything you need to stream with confidence.</p>
+          </div>
+        </div>
+
+        <div class="card-grid">
+          <article class="card">
+            <div class="card-icon">♫</div>
+            <h3 class="card-title">Discography</h3>
+            <p class="card-description">A central catalog of songs, releases, official music videos, and listening platforms.</p>
+            <span class="card-tag">Music library</span>
+          </article>
+
+          <article class="card">
+            <div class="card-icon gold">▶</div>
+            <h3 class="card-title">Streaming Guides</h3>
+            <p class="card-description">Platform-specific instructions, playlists, streaming best practices, and campaign goals.</p>
+            <span class="card-tag gold">Tutorials</span>
+          </article>
+
+          <article class="card">
+            <div class="card-icon green">☷</div>
+            <h3 class="card-title">Playlists & Stations</h3>
+            <p class="card-description">Find official playlists and listening sessions curated by the streaming project team.</p>
+            <a class="text-link" href="https://app.stationhead.com/jlspteam"
+              target="_blank" rel="noopener noreferrer">Visit JLSPT Station ↗</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-section">
+        <div class="section-header">
+          <div>
+            <h2 class="section-heading">Music Library</h2>
+            <p class="section-description">Official song links and release information can be added here.</p>
+          </div>
+        </div>
+
+        <div class="empty-state">
+          <div class="empty-icon">♫</div>
+          <h3>Your next favorite song is one click away.</h3>
+          <p>
+            The discography directory is ready for verified releases,
+            cover artwork, and official platform links.
+          </p>
+        </div>
+      </section>
+    </section>
+
+    <!-- ====================================
+         CALENDAR
+    ===================================== -->
+    <section class="page-section" id="calendar" data-section="calendar">
+      <div class="page-banner">
+        <div>
+          <div class="eyebrow">Stay in the loop</div>
+          <h1>Project Calendar</h1>
+          <p>
+            One place for voting deadlines, streaming events, birthdays,
+            releases, and other JL community activities.
+          </p>
+        </div>
+        <div class="banner-symbol" aria-hidden="true">▦</div>
+      </div>
+
+      <div class="card">
+        <div class="section-header">
+          <div>
+            <h2 class="section-heading" id="calendarMonth">October 2026</h2>
+            <p class="section-description">Calendar dates are shown in Philippine Time (PHT) by default.</p>
+          </div>
+          <div style="display:flex;gap:8px">
+            <button class="btn btn-light" id="prevMonth" aria-label="Previous month">←</button>
+            <button class="btn btn-light" id="nextMonth" aria-label="Next month">→</button>
+          </div>
+        </div>
+
+        <div class="calendar-grid" id="calendarGrid" aria-label="Monthly calendar"></div>
+
+        <div class="campaign-note" style="margin-top:22px">
+          Calendar preview only. No event deadlines have been invented.
+          Verified project events will be added when the calendar data system is ready.
+        </div>
+      </div>
+
+      <section class="content-section">
+        <div class="section-header">
+          <div>
+            <h2 class="section-heading">Upcoming Events</h2>
+            <p class="section-description">A future list of confirmed project dates and event details.</p>
+          </div>
+        </div>
+        <div class="empty-state">
+          <div class="empty-icon">✦</div>
+          <h3>Something special is on the horizon.</h3>
+          <p>Confirmed events will be displayed here once they have been added by the project team.</p>
+        </div>
+      </section>
+    </section>
+
+    <!-- ====================================
+         RED CORNER
+    ===================================== -->
+    <section class="page-section" id="red-corner" data-section="red-corner">
+      <div class="page-banner">
+        <div>
+          <div class="eyebrow">Behind every project</div>
+          <h1>Red Corner</h1>
+          <p>
+            The shared community space for announcements, fan contributions,
+            project submissions, and JL PROJECT HUB updates.
+          </p>
+        </div>
+        <div class="banner-symbol" aria-hidden="true">✦</div>
+      </div>
+
+      <div class="card-grid">
+        <article class="card">
+          <div class="card-icon">♢</div>
+          <h3 class="card-title">Official Announcements</h3>
+          <p class="card-description">Important updates and published notices from JLSPT and JLVPT.</p>
+          <span class="card-tag">Public updates</span>
+        </article>
+
+        <article class="card">
+          <div class="card-icon gold">♡</div>
+          <h3 class="card-title">Starflare Community</h3>
+          <p class="card-description">A welcoming space for community celebrations, fan contributions, and project highlights.</p>
+          <span class="card-tag gold">Community</span>
+        </article>
+
+        <article class="card">
+          <div class="card-icon green">✎</div>
+          <h3 class="card-title">Submit a Project</h3>
+          <p class="card-description">Suggest a fan project, report an outdated resource, or propose an event for review.</p>
+          <a class="text-link" href="mailto:">Contact the team →</a>
+        </article>
+      </div>
+
+      <section class="content-section">
+        <div class="section-header">
+          <div>
+            <h2 class="section-heading">Community Board</h2>
+            <p class="section-description">Public announcements will be published after team review.</p>
+          </div>
+        </div>
+        <div class="empty-state">
+          <div class="empty-icon">✦</div>
+          <h3>A space built by Starflares.</h3>
+          <p>
+            The community board is ready for approved announcements,
+            fan projects, and important updates.
+          </p>
+        </div>
+      </section>
+
+      <div class="content-section campaign-note">
+        Private team discussions and administrative controls will require
+        authenticated permissions. They will not be exposed through public pages.
+      </div>
+    </section>
+
+    <!-- ====================================
+         MY PROFILE
+    ===================================== -->
+    <section class="page-section" id="profile" data-section="profile">
+      <div class="page-banner">
+        <div>
+          <div class="eyebrow">Your space in the community</div>
+          <h1>My Profile</h1>
+          <p>
+            A personal home for saved guides, missions, badges,
+            and your JL PROJECT HUB participation.
+          </p>
+        </div>
+        <div class="banner-symbol" aria-hidden="true">♙</div>
+      </div>
+
+      <div class="profile-panel">
+        <div class="empty-state">
+          <div class="profile-emblem">✦</div>
+          <h3>Your Starflare journey starts here.</h3>
+          <p>
+            Account registration and sign-in will be connected through
+            Supabase in a later step. Profile data, badges, saved content,
+            and missions are not active yet.
+          </p>
+          <button class="btn btn-primary" id="accountNotice" style="margin-top:22px">
+            Account system coming soon
+          </button>
+        </div>
+      </div>
+
+      <section class="content-section">
+        <div class="section-header">
+          <div>
+            <h2 class="section-heading">Your Future Dashboard</h2>
+            <p class="section-description">These features will be connected to your account after authentication is implemented.</p>
+          </div>
+        </div>
+
+        <div class="card-grid">
+          <article class="card">
+            <div class="card-icon gold">✦</div>
+            <h3 class="card-title">Badges & Achievements</h3>
+            <p class="card-description">Collect digital achievements for participating in approved hub activities.</p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">♡</div>
+            <h3 class="card-title">Saved Content</h3>
+            <p class="card-description">Keep your favorite guides, campaigns, and songs in one personal collection.</p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon green">✓</div>
+            <h3 class="card-title">Missions & History</h3>
+            <p class="card-description">Track missions completed on the hub and review your own participation history.</p>
+          </article>
+        </div>
+      </section>
+    </section>
+
+  </main>
+
+  <!-- SHARED WEBSITE FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-main">
+      <div>
+        <div class="footer-brand">JL PROJECT HUB ✦</div>
+        <p class="footer-description">
+          Made with love for STARFLARES / BYEOLBITDAN (별빛단)
+          and everyone who loves JL. May we continue to support his journey,
+          celebrate every milestone, and shine together.
+        </p>
+      </div>
+
+      <div>
+        <div class="footer-social-title">FIND THE PROJECT TEAMS</div>
+        <div class="social-links">
+          <!-- Replace # with each team's verified social account URL. -->
+          <a class="social-link" href="#red-corner" aria-label="JL Voting Project Team">JLVPT</a>
+          <a class="social-link" href="#red-corner" aria-label="JL Streaming Project Team">JLSPT</a>
+          <a class="social-link" href="https://app.stationhead.com/jlspteam"
+            target="_blank" rel="noopener noreferrer" aria-label="JLSPT Stationhead">♫ Station</a>
+        </div>
+        <p class="footer-description">
+          Official team social links will be added after verification.
+        </p>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <span>© <span id="copyrightYear">2026</span> JL PROJECT HUB</span>
+      <span>Created with love for JL and every Starflare. ✦</span>
+    </div>
+  </footer>
+
+  <script>
+    /* ========================================
+       JL PROJECT HUB | PAGE NAVIGATION
+    ======================================== */
+
+    const navigation = document.getElementById("navigation");
+    const menuToggle = document.getElementById("menuToggle");
+    const pageSections = document.querySelectorAll("[data-section]");
+    const navigationLinks = document.querySelectorAll(".nav-link");
+
+    function showPage(pageName, updateAddress = true) {
+      const validPages = ["home", "voting", "streaming", "calendar", "red-corner", "profile"];
+
+      if (!validPages.includes(pageName)) {
+        pageName = "home";
+      }
+
+      pageSections.forEach((section) => {
+        section.classList.toggle(
+          "active",
+          section.dataset.section === pageName
+        );
+      });
+
+      navigationLinks.forEach((link) => {
+        const isActive = link.dataset.page === pageName;
+        link.classList.toggle("active", isActive);
+
+        if (isActive) {
+          link.setAttribute("aria-current", "page");
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      });
+
+      navigation.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.textContent = "☰";
+
+      if (updateAddress) {
+        history.replaceState(null, "", "#" + pageName);
+      }
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    document.querySelectorAll("[data-page]").forEach((control) => {
+      control.addEventListener("click", (event) => {
+        event.preventDefault();
+        showPage(control.dataset.page);
+      });
+    });
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navigation.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.textContent = isOpen ? "✕" : "☰";
+    });
+
+    window.addEventListener("hashchange", () => {
+      const pageName = location.hash.slice(1) || "home";
+      showPage(pageName, false);
+    });
+
+    document.getElementById("accountNotice").addEventListener("click", () => {
+      alert("Supabase authentication will be implemented in a later development step. No account has been created.");
+    });
+
+    /* ========================================
+       MONTHLY CALENDAR PREVIEW
+    ======================================== */
+
+    const calendarGrid = document.getElementById("calendarGrid");
+    const calendarMonth = document.getElementById("calendarMonth");
+
+    let displayedMonth = new Date();
+    displayedMonth = new Date(
+      displayedMonth.getFullYear(),
+      displayedMonth.getMonth(),
+      1
+    );
+
+    const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+    function renderCalendar() {
+      calendarGrid.innerHTML = "";
+
+      calendarMonth.textContent = displayedMonth.toLocaleDateString(
+        "en-US",
+        { month: "long", year: "numeric" }
+      );
+
+      dayNames.forEach((day) => {
+        const label = document.createElement("div");
+        label.className = "calendar-day-name";
+        label.textContent = day;
+        calendarGrid.appendChild(label);
+      });
+
+      const year = displayedMonth.getFullYear();
+      const month = displayedMonth.getMonth();
+      const firstDay = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+      for (let i = 0; i < firstDay; i++) {
+        const blank = document.createElement("div");
+        blank.className = "calendar-day muted";
+        blank.setAttribute("aria-hidden", "true");
+        calendarGrid.appendChild(blank);
+      }
+
+      const now = new Date();
+
+      for (let day = 1; day <= daysInMonth; day++) {
+        const cell = document.createElement("div");
+        cell.className = "calendar-day";
+        cell.textContent = day;
+
+        if (
+          year === now.getFullYear() &&
+          month === now.getMonth() &&
+          day === now.getDate()
+        ) {
+          cell.classList.add("today");
+          cell.setAttribute("aria-label", day + ", today");
+        }
+
+        calendarGrid.appendChild(cell);
+      }
+
+      const totalCells = firstDay + daysInMonth;
+      const trailingBlanks = (7 - (totalCells % 7)) % 7;
+
+      for (let i = 0; i < trailingBlanks; i++) {
+        const blank = document.createElement("div");
+        blank.className = "calendar-day muted";
+        blank.setAttribute("aria-hidden", "true");
+        calendarGrid.appendChild(blank);
+      }
+    }
+
+    document.getElementById("prevMonth").addEventListener("click", () => {
+      displayedMonth = new Date(
+        displayedMonth.getFullYear(),
+        displayedMonth.getMonth() - 1,
+        1
+      );
+      renderCalendar();
+    });
+
+    document.getElementById("nextMonth").addEventListener("click", () => {
+      displayedMonth = new Date(
+        displayedMonth.getFullYear(),
+        displayedMonth.getMonth() + 1,
+        1
+      );
+      renderCalendar();
+    });
+
+    document.getElementById("copyrightYear").textContent =
+      new Date().getFullYear();
+
+    /* INITIALIZE */
+
+    renderCalendar();
+
+    const initialPage = location.hash.slice(1) || "home";
+    showPage(initialPage, false);
+  </script>
+
+</body>
+</html>
