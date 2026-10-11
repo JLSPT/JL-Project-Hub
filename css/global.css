@@ -1,60 +1,107 @@
+
 /* =========================================
    JL PROJECT HUB
    GLOBAL DESIGN SYSTEM
-   Crimson • Gold • Warm White
+   Crimson • Gold • Warm Ivory • Deep Dark
 ========================================= */
 
 :root {
-    --red: #6f1028;
-    --red-dark: #4b0918;
-    --red-deep: #300610;
-    --red-light: #8e2940;
+    /* BRAND COLORS */
+    --red: #A91F2A;
+    --red-dark: #17090B;
+    --red-deep: #100508;
+    --red-light: #C82D35;
 
-    --gold: #c5a15b;
-    --gold-light: #e1c98e;
+    /* GOLD ACCENTS */
+    --gold: #D4AF5C;
+    --gold-light: #FFDA75;
+    --gold-muted: #A88745;
 
-    --cream: #f4efe7;
-    --warm-white: #fffdf9;
-    --white: #ffffff;
+    /* SURFACES */
+    --cream: #17090B;
+    --warm-white: #FFF8F0;
+    --white: #FFFFFF;
+    --surface-dark: #211014;
+    --surface-dark-soft: #2B151A;
+    --surface-raised: #351A20;
 
-    --text: #30252a;
-    --text-soft: #71646a;
-    --border: #e5dbd2;
+    /* TEXT */
+    --text: #342326;
+    --text-soft: #76666A;
+    --text-on-dark: #FFF8F0;
+    --text-muted-on-dark: #D7C4BC;
 
-    --success: #557a65;
+    /* BORDERS */
+    --border: #E8DCD4;
+    --border-dark: #523139;
+    --border-gold: rgba(212, 175, 92, 0.38);
 
+    /* STATUS */
+    --success: #557A65;
+    --success-light: #EAF2EC;
+
+    /* TYPOGRAPHY */
     --font-body: "DM Sans", sans-serif;
     --font-heading: "Playfair Display", serif;
 
+    /* LAYOUT */
+    --page-width: 1440px;
+    --header-height: 82px;
+    --content-gap: 24px;
+
+    /* BORDER RADIUS */
     --radius-sm: 8px;
     --radius-md: 16px;
     --radius-lg: 24px;
 
-    --shadow-soft: 0 8px 28px rgba(48, 6, 16, 0.07);
-    --shadow-card: 0 12px 36px rgba(48, 6, 16, 0.09);
+    /* LEGACY ALIASES USED BY EXISTING COMPONENTS */
+    --line: var(--border-dark);
+    --muted: var(--text-soft);
+    --ink: var(--text);
+    --paper: var(--warm-white);
+    --r-sm: var(--radius-sm);
+    --r-md: var(--radius-md);
+    --r-lg: var(--radius-lg);
+    --green: var(--success);
 
+    /* SHADOWS */
+    --shadow-soft: 0 8px 28px rgba(0, 0, 0, 0.14);
+    --shadow-card: 0 12px 36px rgba(0, 0, 0, 0.22);
+    --shadow-gold: 0 0 28px rgba(212, 175, 92, 0.10);
+
+    /* MOTION */
     --transition: 0.25s ease;
 }
 
 /* RESET */
 
-* {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
 html {
+    width: 100%;
+    min-width: 320px;
     scroll-behavior: smooth;
-    scroll-padding-top: 140px;
+    scroll-padding-top: 150px;
+    overflow-x: clip;
 }
 
 body {
+    width: 100%;
+    min-width: 320px;
+    min-height: 100vh;
     margin: 0;
-    background: var(--cream);
-    color: var(--text);
+    overflow-x: clip;
+    background: var(--red-dark);
+    color: var(--text-on-dark);
     font-family: var(--font-body);
     font-size: 15px;
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
 }
 
 button,
@@ -78,7 +125,9 @@ a {
     text-decoration: none;
 }
 
-img {
+img,
+video,
+svg {
     display: block;
     max-width: 100%;
 }
@@ -96,6 +145,18 @@ h2,
 h3,
 h4 {
     line-height: 1.3;
+    overflow-wrap: break-word;
+}
+
+p {
+    overflow-wrap: break-word;
+}
+
+input,
+textarea,
+select,
+button {
+    min-width: 0;
 }
 
 ::selection {
@@ -104,7 +165,7 @@ h4 {
 }
 
 :focus-visible {
-    outline: 3px solid var(--gold);
+    outline: 3px solid var(--gold-light);
     outline-offset: 3px;
 }
 
@@ -112,13 +173,7 @@ h4 {
     display: none !important;
 }
 
-/* =========================================
-   PAGE VISIBILITY SAFEGUARD
-========================================= */
-
-[hidden] {
-    display: none !important;
-}
+/* PAGE VISIBILITY */
 
 .page-section:not(.is-active) {
     display: none !important;
@@ -126,4 +181,31 @@ h4 {
 
 .page-section.is-active {
     display: block;
+}
+
+/* ACCESSIBILITY */
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }
