@@ -1,13 +1,19 @@
 
 /* =========================================
    JL PROJECT HUB
-   Page Navigation
+   Complete Page Navigation
 ========================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
     const navigation = document.getElementById("navigation");
     const menuToggle = document.getElementById("menuToggle");
-    const navLinks = document.querySelectorAll(".nav-link[data-page]");
+
+    const navLinks = document.querySelectorAll(
+        ".nav-link[data-page]"
+    );
+
+    const pageTriggers = document.querySelectorAll("[data-page]");
+
     const pageSections = document.querySelectorAll(
         ".page-section[data-section]"
     );
@@ -38,13 +44,15 @@ document.addEventListener("DOMContentLoaded", () => {
             const isActive =
                 section.dataset.section === targetPage;
 
-            section.classList.toggle("is-active", isActive);
             section.hidden = !isActive;
+            section.classList.toggle("active", isActive);
+            section.classList.toggle("is-active", isActive);
         });
 
         navLinks.forEach((link) => {
             const isActive = link.dataset.page === targetPage;
 
+            link.classList.toggle("active", isActive);
             link.classList.toggle("is-active", isActive);
 
             if (isActive) {
@@ -54,7 +62,10 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        if (updateHash && window.location.hash !== `#${targetPage}`) {
+        if (
+            updateHash &&
+            window.location.hash !== `#${targetPage}`
+        ) {
             window.history.pushState(
                 { page: targetPage },
                 "",
@@ -72,18 +83,21 @@ document.addEventListener("DOMContentLoaded", () => {
         );
     }
 
-    // Make the page switcher available to other scripts.
     window.showHubPage = showPage;
 
-    // Navigation links.
-    navLinks.forEach((link) => {
-        link.addEventListener("click", (event) => {
+    // Handle navigation links and all buttons using data-page.
+    pageTriggers.forEach((trigger) => {
+        trigger.addEventListener("click", (event) => {
+            const targetPage = trigger.dataset.page;
+
+            if (!validPages.includes(targetPage)) return;
+
             event.preventDefault();
-            showPage(link.dataset.page);
+            showPage(targetPage);
         });
     });
 
-    // Brand logo returns to Home.
+    // Clicking the logo returns to Home.
     document.querySelectorAll(".brand").forEach((brand) => {
         brand.addEventListener("click", (event) => {
             event.preventDefault();
@@ -91,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Mobile menu toggle.
+    // Mobile navigation menu.
     if (menuToggle && navigation) {
         menuToggle.setAttribute("aria-expanded", "false");
 
@@ -106,13 +120,17 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Browser Back and Forward buttons.
+    // Browser Back and Forward support.
     window.addEventListener("popstate", () => {
-        const pageFromHash = window.location.hash.slice(1) || "home";
+        const pageFromHash =
+            window.location.hash.slice(1) || "home";
+
         showPage(pageFromHash, false);
     });
 
-    // Open the page specified in the URL.
-    const initialPage = window.location.hash.slice(1) || "home";
+    // Support direct links such as index.html#streaming.
+    const initialPage =
+        window.location.hash.slice(1) || "home";
+
     showPage(initialPage, false);
 });
