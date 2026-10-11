@@ -1,7 +1,7 @@
 
 /* =========================================
    JL PROJECT HUB
-   GLOBAL CONTENT SEARCH
+   Resource Search
 ========================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -15,86 +15,79 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll("[data-search-item]")
     );
 
-    const normalize = (value) =>
-        String(value || "")
-            .toLowerCase()
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "")
-            .replace(/\s+/g, " ")
-            .trim();
-
     function getItemTitle(item) {
         return (
             item.dataset.searchTitle ||
-            item.querySelector("h1, h2, h3, h4, .card-title")
-                ?.textContent ||
+            item.querySelector("h1, h2, h3, h4, .card-title, .station-title")
+                ?.textContent?.trim() ||
             "Untitled resource"
-        ).trim();
+        );
+    }
+
+    function getItemKeywords(item) {
+        return item.dataset.searchKeywords || "";
     }
 
     function getItemDescription(item) {
-        const description = item.querySelector(
-            ".card-description, p"
+        return (
+            item.dataset.searchDescription ||
+            item.querySelector(
+                ".card-description, .station-description, p"
+            )?.textContent?.trim() ||
+            ""
         );
-
-        return description
-            ? description.textContent.trim()
-            : "Open this section to explore more information.";
     }
 
     function getItemPage(item) {
-        const pageSection = item.closest("[data-section]");
-
-        return pageSection
-            ? pageSection.dataset.section
-            : "home";
+        const section = item.closest("[data-section]");
+        return section?.dataset.section || "home";
     }
 
-    function getItemSearchText(item) {
-        return normalize([
-            item.dataset.searchTitle,
-            item.dataset.searchKeywords,
-            item.textContent
-        ].join(" "));
+    function normalizeText(value) {
+        return value.toLowerCase().trim();
     }
 
-    function makeResult(item) {
+    function clearResults() {
+        searchResults.replaceChildren();
+        searchResults.hidden = true;
+    }
+
+    function createResult(item, query) {
+        const title = getItemTitle(item);
+        const description = getItemDescription(item);
+        const keywords = getItemKeywords(item);
+        const page = getItemPage(item);
+
         const result = document.createElement("button");
         result.type = "button";
         result.className = "search-result-item";
 
-        const title = document.createElement("span");
-        title.className = "search-result-title";
-        title.textContent = getItemTitle(item);
+        const titleElement = document.createElement("span");
+        titleElement.className = "search-result-title";
+        titleElement.textContent = title;
 
-        const description = document.createElement("span");
-        description.className = "search-result-description";
-        description.textContent = getItemDescription(item);
+        const descriptionElement = document.createElement("span");
+        descriptionElement.className = "search-result-description";
+        descriptionElement.textContent = description;
 
-        const category = document.createElement("span");
-        category.className = "search-result-category";
-        category.textContent = getItemPage(item)
-            .replace("-", " ")
-            .replace(/\b\w/g, (letter) => letter.toUpperCase());
+        const categoryElement = document.createElement("span");
+        categoryElement.className = "search-result-category";
+        categoryElement.textContent = page
+            .split("-")
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(" ");
 
-        result.append(title, description, category);
+        result.append(
+            titleElement,
+            descriptionElement,
+            categoryElement
+        );
 
         result.addEventListener("click", () => {
-            const page = getItemPage(item);
-
             if (typeof window.showHubPage === "function") {
                 window.showHubPage(page);
-            } else {
-                const navLink = document.querySelector(
-                    `.nav-link[data-page="${page}"]`
-                );
-
-                if (navLink) {
-                    navLink.click();
-                }
             }
 
-            // Bring the matching item into view when possible.
             window.setTimeout(() => {
                 item.scrollIntoView({
                     behavior: "smooth",
@@ -107,113 +100,82 @@ document.addEventListener("DOMContentLoaded", () => {
                     item.classList.remove("search-highlight");
                 }, 1800);
             }, 100);
+
+            searchInput.value = "";
+            clearResults();
         });
 
         return result;
     }
 
-    function renderHint(message) {
+    function searchResources() {
+        const query = normalizeText(searchInput.value);
+
         searchResults.replaceChildren();
-
-        const hint = document.createElement("p");
-        hint.className = "search-hint";
-        hint.textContent = message;
-
-        searchResults.appendChild(hint);
-    }
-
-    function performSearch() {
-        const query = normalize(searchInput.value);
-
-        if (clearButton) {
-            clearButton.hidden = query.length === 0;
-        }
 
         if (!query) {
-            renderHint(
-                'Try "AHOF", "voting guide", "Stationhead", or "calendar".'
-            );
+            searchResults.hidden = true;
             return;
         }
 
-        const terms = query.split(" ").filter(Boolean);
+        const matches = searchableItems.filter((item) => {
+            const searchableText = normalizeText([
+                getItemTitle(item),
+                getItemDescription(item),
+                getItemKeywords(item),
+                item.textContent || ""
+            ].join(" "));
 
-        const matches = searchableItems
-            .map((item) => {
-                const text = getItemSearchText(item);
+            return searchableText.includes(query);
+        });
 
-                const matched = terms.every((term) =>
-                    text.includes(term)
-                );
-
-                if (!matched) return null;
-
-                let score = 0;
-                const title = normalize(getItemTitle(item));
-                const keywords = normalize(
-                    item.dataset.searchKeywords
-                );
-
-                if (title === query) score += 100;
-                if (title.includes(query)) score += 50;
-                if (keywords.includes(query)) score += 25;
-
-                return { item, score };
-            })
-            .filter(Boolean)
-            .sort((a, b) => b.score - a.score);
-
-        searchResults.replaceChildren();
-
-        if (matches.length === 0) {
-            const empty = document.createElement("div");
-            empty.className = "search-empty";
-
-            const heading = document.createElement("h3");
-            heading.textContent = "No matching resources found";
-
-            const description = document.createElement("p");
-            description.textContent =
-                "Try another keyword, platform name, song title, or campaign category.";
-
-            empty.append(heading, description);
-            searchResults.appendChild(empty);
-            return;
-        }
-
-        const summary = document.createElement("p");
-        summary.className = "search-summary";
-        summary.textContent =
-            `${matches.length} resource${matches.length === 1 ? "" : "s"} found`;
+        searchResults.hidden = false;
 
         const list = document.createElement("div");
         list.className = "search-result-list";
 
-        matches.forEach(({ item }) => {
-            list.appendChild(makeResult(item));
-        });
+        if (matches.length === 0) {
+            const emptyMessage = document.createElement("p");
+            emptyMessage.className = "search-empty";
+            emptyMessage.textContent =
+                "No resources found. Try another keyword.";
 
-        searchResults.append(summary, list);
+            list.appendChild(emptyMessage);
+        } else {
+            matches.forEach((item) => {
+                list.appendChild(createResult(item, query));
+            });
+        }
+
+        searchResults.appendChild(list);
     }
 
-    searchInput.addEventListener("input", performSearch);
+    searchInput.addEventListener("input", searchResources);
 
     if (clearButton) {
         clearButton.addEventListener("click", () => {
             searchInput.value = "";
-            performSearch();
+            clearResults();
             searchInput.focus();
         });
     }
 
-    // Allow other scripts to refresh the search index after content changes.
-    document.addEventListener("hub:contentupdated", () => {
-        searchableItems.splice(
-            0,
-            searchableItems.length,
-            ...document.querySelectorAll("[data-search-item]")
-        );
+    document.addEventListener("click", (event) => {
+        const clickedInsideSearch =
+            searchInput.contains(event.target) ||
+            searchResults.contains(event.target) ||
+            clearButton?.contains(event.target);
 
-        performSearch();
+        if (!clickedInsideSearch) {
+            clearResults();
+        }
+    });
+
+    searchInput.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+            searchInput.value = "";
+            clearResults();
+            searchInput.blur();
+        }
     });
 });
