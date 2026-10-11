@@ -111,3 +111,19 @@ h4 {
 [hidden] {
     display: none !important;
 }
+
+/* =========================================
+   PAGE VISIBILITY SAFEGUARD
+========================================= */
+
+[hidden] {
+    display: none !important;
+}
+
+.page-section:not(.is-active) {
+    display: none !important;
+}
+
+.page-section.is-active {
+    display: block;
+}
