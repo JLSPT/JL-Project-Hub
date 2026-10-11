@@ -1,69 +1,31 @@
 
 /* =========================================
    JL PROJECT HUB
-   MAIN APPLICATION
+   App Initialization
 ========================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
-    "use strict";
+    // Automatically update the footer year.
+    const copyrightYear = document.getElementById("copyrightYear");
 
-    // Current year for the footer
-    const currentYear = document.getElementById("currentYear");
-
-    if (currentYear) {
-        currentYear.textContent = new Date().getFullYear();
+    if (copyrightYear) {
+        copyrightYear.textContent = new Date().getFullYear();
     }
 
-    // Shared page navigation helper
-    window.showHubPage = function (pageName) {
-        const link = document.querySelector(
-            `.nav-link[data-page="${pageName}"]`
-        );
+    // Add safe attributes to external links.
+    document.querySelectorAll('a[target="_blank"]').forEach((link) => {
+        const existingRel = link.getAttribute("rel") || "";
+        const relValues = new Set(existingRel.split(/\s+/).filter(Boolean));
 
-        if (link) {
-            link.click();
-            return;
-        }
+        relValues.add("noopener");
+        relValues.add("noreferrer");
 
-        const section = document.querySelector(
-            `.page-section[data-section="${pageName}"]`
-        );
+        link.setAttribute("rel", [...relValues].join(" "));
+    });
 
-        if (section) {
-            document.querySelectorAll(".page-section").forEach(
-                (page) => {
-                    page.classList.toggle(
-                        "active",
-                        page === section
-                    );
-                }
-            );
-
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
-        }
-    };
-
-    // Make external links open safely in a new tab
-    document.querySelectorAll('a[target="_blank"]').forEach(
-        (link) => {
-            const existing = link.getAttribute("rel") || "";
-
-            const relValues = new Set(existing.split(/\s+/).filter(Boolean));
-
-            relValues.add("noopener");
-            relValues.add("noreferrer");
-
-            link.setAttribute("rel", [...relValues].join(" "));
-        }
-    );
-
-    // Announce that the interface is ready
+    // Mark the site as initialized.
     document.documentElement.classList.add("app-ready");
 
-    document.dispatchEvent(
-        new CustomEvent("hub:ready")
-    );
+    // Notify other scripts that the app is ready.
+    document.dispatchEvent(new CustomEvent("hub:ready"));
 });
