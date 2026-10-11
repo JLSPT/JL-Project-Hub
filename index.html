@@ -1,136 +1,467 @@
 
-/* =========================================
-   JL PROJECT HUB
-   Complete Page Navigation
-========================================= */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#4b0918">
+  <meta name="description" content="JL PROJECT HUB brings together JL voting campaigns, streaming projects, guides, and events for Starflares and Byeolbitdan.">
+  <title>JL PROJECT HUB | One Hub, Every Starflare</title>
 
-document.addEventListener("DOMContentLoaded", () => {
-    const navigation = document.getElementById("navigation");
-    const menuToggle = document.getElementById("menuToggle");
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 
-    const navLinks = document.querySelectorAll(
-        ".nav-link[data-page]"
-    );
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
 
-    const pageTriggers = document.querySelectorAll("[data-page]");
+  <script src="js/navigation.js" defer></script>
+  <script src="js/search.js" defer></script>
+  <script src="js/calendar.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
 
-    const pageSections = document.querySelectorAll(
-        ".page-section[data-section]"
-    );
+<body>
+  <header class="site-header">
+    <div class="container header-main">
+      <a href="#home" class="brand" aria-label="JL Project Hub Home">
+        <div class="brand-mark">JL<span class="brand-star">✦</span></div>
+        <div class="brand-copy">
+          <div class="brand-name">JL PROJECT HUB</div>
+          <div class="brand-subtitle">JL Voting Project Team | JL Streaming Project Team</div>
+        </div>
+      </a>
 
-    const validPages = [
-        "home",
-        "voting",
-        "streaming",
-        "calendar",
-        "red-corner",
-        "profile"
-    ];
+      <div class="header-actions">
+        <button class="mobile-menu-button" id="menuToggle" type="button" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+      </div>
+    </div>
 
-    function closeMobileMenu() {
-        if (!navigation || !menuToggle) return;
+    <nav class="navigation" id="navigation" aria-label="Main navigation">
+      <div class="container nav-inner">
+        <a href="#home" class="nav-link" data-page="home">⌂ <span>Home</span></a>
+        <a href="#voting" class="nav-link" data-page="voting">♡ <span>Voting</span></a>
+        <a href="#streaming" class="nav-link" data-page="streaming">♫ <span>Streaming</span></a>
+        <a href="#calendar" class="nav-link" data-page="calendar">▦ <span>Calendar</span></a>
+        <a href="#red-corner" class="nav-link" data-page="red-corner">✦ <span>Red Corner</span></a>
+        <a href="#profile" class="nav-link" data-page="profile">♙ <span>My Profile</span></a>
+      </div>
+    </nav>
+  </header>
 
-        navigation.classList.remove("is-open");
-        menuToggle.classList.remove("is-active");
-        menuToggle.setAttribute("aria-expanded", "false");
-    }
+  <main class="container">
 
-    function showPage(pageName, updateHash = true) {
-        const targetPage = validPages.includes(pageName)
-            ? pageName
-            : "home";
+    <!-- HOME -->
+    <section class="page-section is-active" id="home" data-section="home">
+      <div class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow">A home for every Starflare</div>
+          <h1>Every star shines.<br>Every <span>effort</span> matters.</h1>
+          <p class="hero-description">Welcome to JL PROJECT HUB, your central space for JL voting campaigns, streaming projects, fan guides, and community events. Together, let's make every effort count.</p>
+          <div class="hero-actions">
+            <button class="btn btn-gold" data-page="voting" type="button">Explore Voting ↗</button>
+            <button class="btn btn-outline" data-page="streaming" type="button">Explore Streaming →</button>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="hero-orbit"></div>
+          <div class="hero-star">✦</div>
+        </div>
+      </div>
 
-        pageSections.forEach((section) => {
-            const isActive =
-                section.dataset.section === targetPage;
+      <section class="home-search content-section" aria-labelledby="hubSearchTitle">
+        <div class="section-header">
+          <div>
+            <div class="eyebrow">Find it in the hub</div>
+            <h2 class="section-heading" id="hubSearchTitle">What are you looking for?</h2>
+            <p class="section-description">Search songs, platforms, guides, campaigns, events, and announcements.</p>
+          </div>
+        </div>
+        <label class="search-box" for="hubSearchInput">
+          <span aria-hidden="true">⌕</span>
+          <input id="hubSearchInput" type="search" placeholder="Search the hub..." autocomplete="off">
+          <button id="clearSearch" class="search-clear" type="button" aria-label="Clear search" hidden>×</button>
+        </label>
+        <div id="searchResults" class="search-results" aria-live="polite">
+          <p class="search-hint">Try “AHOF”, “voting guide”, “Stationhead”, or “calendar”.</p>
+        </div>
+      </section>
 
-            section.hidden = !isActive;
-            section.classList.toggle("active", isActive);
-            section.classList.toggle("is-active", isActive);
-        });
+      <div class="station-card" data-search-item data-search-title="JLSPT Listening Station" data-search-keywords="Stationhead music listening station streaming JL AHOF">
+        <div class="station-icon" aria-hidden="true">♫</div>
+        <div class="station-content">
+          <div class="live-label"><span class="live-dot"></span> Stationhead Station</div>
+          <h2 class="station-title">JLSPT Listening Station</h2>
+          <p class="station-description">Tune in and enjoy JL and AHOF music with fellow Starflares. The station is intended to be open 24/7, except during scheduled collaboration streams.</p>
+        </div>
+        <a class="btn btn-primary" href="https://app.stationhead.com/jlspteam" target="_blank" rel="noopener noreferrer">Listen on Stationhead ↗</a>
+      </div>
 
-        navLinks.forEach((link) => {
-            const isActive = link.dataset.page === targetPage;
+      <section class="content-section">
+        <div class="section-header">
+          <div>
+            <div class="eyebrow">What needs attention</div>
+            <h2 class="section-heading">Priority Campaigns</h2>
+            <p class="section-description">Your starting point for supporting JL.</p>
+          </div>
+          <a href="#voting" class="text-link" data-page="voting">All campaigns →</a>
+        </div>
 
-            link.classList.toggle("active", isActive);
-            link.classList.toggle("is-active", isActive);
+        <div class="card-grid">
+          <article class="card campaign-card" data-search-item data-search-title="Voting Campaigns" data-search-keywords="voting awards polls voting currency guides campaign">
+            <div class="card-icon">♡</div>
+            <span class="card-tag">Voting</span>
+            <h3 class="card-title">Voting Campaigns</h3>
+            <p class="card-description">Find active voting projects, upcoming award rounds, and step-by-step guides to help you vote.</p>
+            <button class="text-link" data-page="voting" type="button">Explore voting →</button>
+          </article>
 
-            if (isActive) {
-                link.setAttribute("aria-current", "page");
-            } else {
-                link.removeAttribute("aria-current");
-            }
-        });
+          <article class="card campaign-card" data-search-item data-search-title="Streaming Campaigns" data-search-keywords="streaming music playlists platform guide">
+            <div class="card-icon gold">♫</div>
+            <span class="card-tag gold">Streaming</span>
+            <h3 class="card-title">Streaming Campaigns</h3>
+            <p class="card-description">Discover priority streaming goals, official playlists, and platform guides for JL and AHOF.</p>
+            <button class="text-link" data-page="streaming" type="button">Explore streaming →</button>
+          </article>
 
-        if (
-            updateHash &&
-            window.location.hash !== `#${targetPage}`
-        ) {
-            window.history.pushState(
-                { page: targetPage },
-                "",
-                `#${targetPage}`
-            );
-        }
+          <article class="card campaign-card" data-search-item data-search-title="Upcoming Events" data-search-keywords="calendar deadlines birthdays releases event schedules">
+            <div class="card-icon green">▦</div>
+            <span class="card-tag">Events</span>
+            <h3 class="card-title">Upcoming Events</h3>
+            <p class="card-description">Keep track of project schedules, voting deadlines, streaming events, and birthday activities.</p>
+            <button class="text-link" data-page="calendar" type="button">View calendar →</button>
+          </article>
+        </div>
+      </section>
 
-        closeMobileMenu();
-        window.scrollTo({ top: 0, behavior: "auto" });
+      <section class="content-section">
+        <div class="section-header">
+          <div>
+            <div class="eyebrow">Everything in one place</div>
+            <h2 class="section-heading">Explore the Hub</h2>
+            <p class="section-description">Find the information you need without the clutter.</p>
+          </div>
+        </div>
 
-        document.dispatchEvent(
-            new CustomEvent("hub:pagechange", {
-                detail: { page: targetPage }
-            })
-        );
-    }
+        <div class="card-grid">
+          <article class="card" data-search-item data-search-title="Voting Guides" data-search-keywords="tutorial instructions eligibility voting currency daily tasks app FAQ">
+            <div class="card-icon">▤</div>
+            <h3 class="card-title">Voting Guides</h3>
+            <p class="card-description">Step-by-step instructions, app FAQs, eligibility notes, and tips for participating in voting campaigns.</p>
+            <button class="text-link" data-page="voting" type="button">Browse guides →</button>
+          </article>
 
-    window.showHubPage = showPage;
+          <article class="card" data-search-item data-search-title="JL Discography" data-search-keywords="PLUUS UNIVERSE LEAGUE SOLO AHOF songs albums sub-unit releases music videos">
+            <div class="card-icon gold">♫</div>
+            <h3 class="card-title">JL Discography</h3>
+            <p class="card-description">Explore releases grouped by PLUUS, UNIVERSE LEAGUE, SOLO, and AHOF, including AHOF sub-unit releases.</p>
+            <button class="text-link" data-page="streaming" type="button">Explore music →</button>
+          </article>
 
-    // Handle navigation links and all buttons using data-page.
-    pageTriggers.forEach((trigger) => {
-        trigger.addEventListener("click", (event) => {
-            const targetPage = trigger.dataset.page;
+          <article class="card" data-search-item data-search-title="Red Corner" data-search-keywords="community announcements fan contributions submissions project updates">
+            <div class="card-icon">✦</div>
+            <h3 class="card-title">Red Corner</h3>
+            <p class="card-description">Visit the community space for public announcements, project updates, and fan submissions.</p>
+            <button class="text-link" data-page="red-corner" type="button">Enter Red Corner →</button>
+          </article>
+        </div>
+      </section>
 
-            if (!validPages.includes(targetPage)) return;
+      <div class="content-section campaign-note">✦ Campaign information and schedules will be published and verified by the project team. Check each campaign's official instructions before participating.</div>
+    </section>
 
-            event.preventDefault();
-            showPage(targetPage);
-        });
-    });
+    <!-- VOTING -->
+    <section class="page-section" id="voting" data-section="voting" hidden>
+      <div class="page-banner">
+        <div>
+          <div class="eyebrow">Every vote counts</div>
+          <h1>Voting Center</h1>
+          <p>Discover voting campaigns, follow official guides, and keep track of important deadlines for JL.</p>
+        </div>
+        <div class="banner-symbol" aria-hidden="true">♡</div>
+      </div>
 
-    // Clicking the logo returns to Home.
-    document.querySelectorAll(".brand").forEach((brand) => {
-        brand.addEventListener("click", (event) => {
-            event.preventDefault();
-            showPage("home");
-        });
-    });
+      <section class="content-section section-first">
+        <div class="section-header">
+          <div>
+            <h2 class="section-heading">Voting Resources</h2>
+            <p class="section-description">Choose a resource category to find verified information.</p>
+          </div>
+        </div>
+        <div class="card-grid">
+          <article class="card" data-search-item data-search-title="Active Campaigns" data-search-keywords="current polls awards voting links goals verified deadlines">
+            <div class="card-icon">♡</div>
+            <h3 class="card-title">Active Campaigns</h3>
+            <p class="card-description">Current polls, awards, voting links, goals, and verified deadlines.</p>
+            <span class="card-tag">Campaign directory</span>
+          </article>
+          <article class="card" data-search-item data-search-title="Birthday Voting" data-search-keywords="birthday polls celebrations special voting JL">
+            <div class="card-icon gold">🎂</div>
+            <h3 class="card-title">Birthday Voting</h3>
+            <p class="card-description">Birthday polls, upcoming celebrations, and special voting projects for JL.</p>
+            <span class="card-tag gold">Birthday projects</span>
+          </article>
+          <article class="card" data-search-item data-search-title="Voting Guides" data-search-keywords="step by step tutorials eligibility voting currencies daily tasks apps FAQs">
+            <div class="card-icon green">▤</div>
+            <h3 class="card-title">Voting Guides & FAQs</h3>
+            <p class="card-description">Platform-specific tutorials, eligibility, voting currencies, daily tasks, and app FAQs.</p>
+            <span class="card-tag">Tutorials</span>
+          </article>
+        </div>
+      </section>
 
-    // Mobile navigation menu.
-    if (menuToggle && navigation) {
-        menuToggle.setAttribute("aria-expanded", "false");
+      <section class="content-section">
+        <div class="section-header">
+          <div>
+            <h2 class="section-heading">Campaign Directory</h2>
+            <p class="section-description">Campaigns will be organized by platform with verified rules and deadlines.</p>
+          </div>
+        </div>
+        <div class="empty-state">
+          <div class="empty-icon">✦</div>
+          <h3>Every campaign starts with a goal.</h3>
+          <p>No unverified campaigns have been added yet. This directory is ready for the team to publish official links, rules, and deadlines.</p>
+        </div>
+      </section>
+    </section>
 
-        menuToggle.addEventListener("click", () => {
-            const isOpen = navigation.classList.toggle("is-open");
+    <!-- STREAMING -->
+    <section class="page-section" id="streaming" data-section="streaming" hidden>
+      <div class="page-banner">
+        <div>
+          <div class="eyebrow">Let the music shine</div>
+          <h1>Streaming Center</h1>
+          <p>Find music, playlists, streaming instructions, and troubleshooting resources for JL and AHOF.</p>
+        </div>
+        <div class="banner-symbol" aria-hidden="true">♫</div>
+      </div>
 
-            menuToggle.classList.toggle("is-active", isOpen);
-            menuToggle.setAttribute(
-                "aria-expanded",
-                String(isOpen)
-            );
-        });
-    }
+      <section class="content-section section-first">
+        <div class="section-header">
+          <div>
+            <h2 class="section-heading">Music & Streaming Resources</h2>
+            <p class="section-description">Platform guides, music resources, and listening projects in one place.</p>
+          </div>
+        </div>
+        <div class="card-grid">
+          <article class="card" data-search-item data-search-title="Discography" data-search-keywords="PLUUS UNIVERSE LEAGUE SOLO AHOF sub-unit songs releases official music videos">
+            <div class="card-icon">♫</div>
+            <h3 class="card-title">Discography</h3>
+            <p class="card-description">A catalog organized by PLUUS, UNIVERSE LEAGUE, SOLO, and AHOF, including AHOF sub-unit releases.</p>
+            <span class="card-tag">Music library</span>
+          </article>
+          <article class="card" data-search-item data-search-title="Streaming Guides" data-search-keywords="platform instructions playlists best practices campaign goals troubleshooting">
+            <div class="card-icon gold">▶</div>
+            <h3 class="card-title">Streaming Guides & FAQs</h3>
+            <p class="card-description">Platform-specific instructions, playlists, troubleshooting, and campaign goals.</p>
+            <span class="card-tag gold">Platform guides</span>
+          </article>
+          <article class="card" data-search-item data-search-title="Playlists & Stations" data-search-keywords="Stationhead listening sessions playlists JLSPT">
+            <div class="card-icon green">☷</div>
+            <h3 class="card-title">Playlists & Stations</h3>
+            <p class="card-description">Find official playlists and listening sessions curated by the streaming project team.</p>
+            <a class="text-link" href="https://app.stationhead.com/jlspteam" target="_blank" rel="noopener noreferrer">Visit JLSPT Station ↗</a>
+          </article>
+        </div>
+      </section>
 
-    // Browser Back and Forward support.
-    window.addEventListener("popstate", () => {
-        const pageFromHash =
-            window.location.hash.slice(1) || "home";
+      <section class="content-section">
+        <div class="section-header">
+          <div>
+            <h2 class="section-heading">Music Library</h2>
+            <p class="section-description">The catalog will include verified releases and official platform links.</p>
+          </div>
+        </div>
+        <div class="discography-groups">
+          <article class="discography-group" data-search-item data-search-title="PLUUS" data-search-keywords="PLUUS releases discography">
+            <h3>PLUUS</h3>
+            <p>Releases and songs connected to JL's PLUUS activities.</p>
+            <span class="card-tag">Coming soon</span>
+          </article>
+          <article class="discography-group" data-search-item data-search-title="UNIVERSE LEAGUE" data-search-keywords="UNIVERSE LEAGUE releases songs discography">
+            <h3>UNIVERSE LEAGUE</h3>
+            <p>Music and official performance releases from UNIVERSE LEAGUE.</p>
+            <span class="card-tag">Coming soon</span>
+          </article>
+          <article class="discography-group" data-search-item data-search-title="SOLO" data-search-keywords="JL solo releases songs music videos">
+            <h3>SOLO</h3>
+            <p>JL's solo releases, including official songs and music videos.</p>
+            <span class="card-tag">Coming soon</span>
+          </article>
+          <article class="discography-group" data-search-item data-search-title="AHOF" data-search-keywords="AHOF group songs albums sub-unit releases">
+            <h3>AHOF</h3>
+            <p>Group releases and sub-unit music, organized together under AHOF.</p>
+            <span class="card-tag">Coming soon</span>
+          </article>
+        </div>
+      </section>
+    </section>
 
-        showPage(pageFromHash, false);
-    });
+    <!-- CALENDAR -->
+    <section class="page-section" id="calendar" data-section="calendar" hidden>
+      <div class="page-banner">
+        <div>
+          <div class="eyebrow">Stay in the loop</div>
+          <h1>Project Calendar</h1>
+          <p>One place for voting deadlines, streaming events, birthdays, releases, and other JL community activities.</p>
+        </div>
+        <div class="banner-symbol" aria-hidden="true">▦</div>
+      </div>
 
-    // Support direct links such as index.html#streaming.
-    const initialPage =
-        window.location.hash.slice(1) || "home";
+      <div class="card">
+        <div class="section-header calendar-header">
+          <div>
+            <h2 class="section-heading" id="calendarMonth">Loading calendar…</h2>
+            <p class="section-description">Dates and times use Korea Standard Time (KST, UTC+9).</p>
+          </div>
+          <div class="calendar-controls">
+            <button class="btn btn-light" id="prevMonth" type="button" aria-label="Previous month">←</button>
+            <button class="btn btn-light" id="nextMonth" type="button" aria-label="Next month">→</button>
+          </div>
+        </div>
+        <div class="calendar-grid" id="calendarGrid" aria-label="Monthly calendar"></div>
+        <div class="campaign-note calendar-note">Calendar preview only. No event deadlines have been invented. Verified project events will be added when the calendar data system is ready.</div>
+      </div>
 
-    showPage(initialPage, false);
-});
+      <section class="content-section">
+        <div class="section-header">
+          <div>
+            <h2 class="section-heading">Upcoming Events</h2>
+            <p class="section-description">Confirmed project dates and event details will appear here.</p>
+          </div>
+        </div>
+        <div class="empty-state">
+          <div class="empty-icon">✦</div>
+          <h3>Something special is on the horizon.</h3>
+          <p>Confirmed events will be displayed here once they have been added by the project team.</p>
+        </div>
+      </section>
+    </section>
+
+    <!-- RED CORNER -->
+    <section class="page-section" id="red-corner" data-section="red-corner" hidden>
+      <div class="page-banner">
+        <div>
+          <div class="eyebrow">Behind every project</div>
+          <h1>Red Corner</h1>
+          <p>The shared community space for announcements, fan contributions, project submissions, and hub updates.</p>
+        </div>
+        <div class="banner-symbol" aria-hidden="true">✦</div>
+      </div>
+
+      <div class="card-grid">
+        <article class="card" data-search-item data-search-title="Official Announcements" data-search-keywords="JLSPT JLVPT updates notices news">
+          <div class="card-icon">♢</div>
+          <h3 class="card-title">Official Announcements</h3>
+          <p class="card-description">Important updates and published notices from JLSPT and JLVPT.</p>
+          <span class="card-tag">Public updates</span>
+        </article>
+        <article class="card" data-search-item data-search-title="Starflare Community" data-search-keywords="community celebrations fan contributions project highlights">
+          <div class="card-icon gold">♡</div>
+          <h3 class="card-title">Starflare Community</h3>
+          <p class="card-description">A welcoming space for community celebrations, fan contributions, and project highlights.</p>
+          <span class="card-tag gold">Community</span>
+        </article>
+        <article class="card" data-search-item data-search-title="Submit a Project" data-search-keywords="suggest fan project report outdated resource propose event">
+          <div class="card-icon green">✎</div>
+          <h3 class="card-title">Submit a Project</h3>
+          <p class="card-description">Suggest a fan project, report an outdated resource, or propose an event for review.</p>
+          <span class="card-tag">Submission portal planned</span>
+        </article>
+      </div>
+
+      <section class="content-section">
+        <div class="section-header">
+          <div>
+            <h2 class="section-heading">Community Board</h2>
+            <p class="section-description">Public announcements will be published after team review.</p>
+          </div>
+        </div>
+        <div class="empty-state">
+          <div class="empty-icon">✦</div>
+          <h3>A space built by Starflares.</h3>
+          <p>The community board is ready for approved announcements, fan projects, and important updates.</p>
+        </div>
+      </section>
+      <div class="content-section campaign-note">Private team discussions and administrative controls will require authenticated permissions. They will not be exposed through public pages.</div>
+    </section>
+
+    <!-- MY PROFILE -->
+    <section class="page-section" id="profile" data-section="profile" hidden>
+      <div class="page-banner">
+        <div>
+          <div class="eyebrow">Your space in the community</div>
+          <h1>My Profile</h1>
+          <p>Your personal home for saved guides, missions, badges, and your JL PROJECT HUB participation.</p>
+        </div>
+        <div class="banner-symbol" aria-hidden="true">♙</div>
+      </div>
+
+      <div class="profile-panel">
+        <div class="profile-welcome">
+          <div class="profile-emblem">✦</div>
+          <div class="eyebrow">Welcome, Starflare</div>
+          <h2 class="profile-welcome-title">Your journey shines brighter together.</h2>
+          <p>Thank you for being part of this community and supporting JL. Your personal dashboard will grow as account features are introduced.</p>
+        </div>
+        <div class="empty-state">
+          <h3>Your account is not connected yet.</h3>
+          <p>Registration and sign-in will be connected through Supabase in a later development step. No account, saved data, or participation history is active yet.</p>
+          <button class="btn btn-primary" id="accountNotice" type="button">Account system coming soon</button>
+        </div>
+      </div>
+
+      <section class="content-section">
+        <div class="section-header">
+          <div>
+            <h2 class="section-heading">Your Future Dashboard</h2>
+            <p class="section-description">These features will be connected after authentication is implemented.</p>
+          </div>
+        </div>
+        <div class="card-grid">
+          <article class="card">
+            <div class="card-icon gold">✦</div>
+            <h3 class="card-title">Badges & Achievements</h3>
+            <p class="card-description">Collect digital achievements for participating in approved hub activities.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon">♡</div>
+            <h3 class="card-title">Saved Content</h3>
+            <p class="card-description">Keep your favorite guides, campaigns, and songs in one personal collection.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon green">✓</div>
+            <h3 class="card-title">Missions & History</h3>
+            <p class="card-description">Track missions completed on the hub and review your own participation history.</p>
+          </article>
+        </div>
+      </section>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-main">
+      <div>
+        <div class="footer-brand">For JL, with love ✦</div>
+        <p class="footer-description">Made with love for STARFLARES / BYEOLBITDAN (별빛단) and everyone who loves JL. May we continue to support his journey, celebrate every milestone, and shine together.</p>
+      </div>
+      <div>
+        <div class="footer-social-title">FIND THE PROJECT TEAMS</div>
+        <div class="social-links">
+          <a class="social-link" href="#red-corner" aria-label="JL Voting Project Team">JLVPT</a>
+          <a class="social-link" href="#red-corner" aria-label="JL Streaming Project Team">JLSPT</a>
+          <a class="social-link" href="https://app.stationhead.com/jlspteam" target="_blank" rel="noopener noreferrer" aria-label="JLSPT Stationhead">♫ Station</a>
+        </div>
+        <p class="footer-description">Official team social links will be added after verification.</p>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© <span id="copyrightYear">2026</span> JL PROJECT HUB</span>
+      <span>Created with love for JL and every Starflare. ✦</span>
+    </div>
+  </footer>
+</body>
+</html>
