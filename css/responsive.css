@@ -366,3 +366,139 @@
         transition-duration: 0.01ms !important;
     }
 }
+
+/* =========================================
+   JLSPT RESPONSIVE FINISH
+========================================= */
+
+/* Prevent accidental horizontal overflow */
+html,
+body {
+    max-width: 100%;
+    overflow-x: clip;
+}
+
+.container,
+main,
+.page-section,
+.content-section,
+.card-grid,
+.directory,
+.directory-row {
+    min-width: 0;
+}
+
+.card-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.card,
+.directory-row,
+.station-card {
+    overflow-wrap: anywhere;
+}
+
+/* Tablet and compact laptop */
+@media (max-width: 1100px) {
+    .container {
+        width: calc(100% - 40px);
+    }
+
+    .card-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .header-main {
+        gap: 16px;
+    }
+
+    .nav-inner {
+        flex-wrap: wrap;
+    }
+}
+
+/* Mobile and narrow tablet */
+@media (max-width: 760px) {
+    .container {
+        width: calc(100% - 28px);
+    }
+
+    .header-main {
+        flex-wrap: wrap;
+    }
+
+    .header-tools {
+        margin-left: auto;
+    }
+
+    .mobile-toggle {
+        display: grid;
+        place-items: center;
+    }
+
+    .card-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .hero,
+    .page-banner,
+    .profile-welcome {
+        max-width: 100%;
+    }
+
+    .station-card {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .station-card .btn {
+        max-width: 100%;
+        white-space: normal;
+    }
+
+    .directory-row {
+        flex-wrap: wrap;
+    }
+
+    .directory-copy {
+        flex: 1 1 180px;
+        min-width: 0;
+    }
+
+    .calendar-grid {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+/* Small phones */
+@media (max-width: 420px) {
+    .container {
+        width: calc(100% - 22px);
+    }
+
+    .brand-name {
+        font-size: 15px;
+    }
+
+    .brand-subtitle {
+        max-width: 185px;
+        line-height: 1.4;
+    }
+
+    .hero {
+        padding: 22px 17px;
+    }
+
+    .section-heading {
+        overflow-wrap: anywhere;
+    }
+
+    .calendar-weekday {
+        font-size: 8px;
+    }
+
+    .calendar-event {
+        overflow-wrap: anywhere;
+    }
+}
